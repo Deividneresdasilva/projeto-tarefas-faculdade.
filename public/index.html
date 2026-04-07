@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciador de Tarefas</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
 
+  <div class="container">
+    <header class="header">
+      <div>
+        <h1>Minhas Tarefas</h1>
+        <p class="subtitulo">Organize. Execute. Conquiste.</p>
+      </div>
+      <div class="contador" id="contadorTarefas">0 tarefas</div>
+    </header>
+
+    <div class="card formulario-card">
+      <h2 class="form-titulo" id="formTitulo">Nova Tarefa</h2>
+      <div class="form-group">
+        <label for="titulo">Título <span class="obrigatorio">*</span></label>
+        <input type="text" id="titulo" placeholder="O que você precisa fazer?">
+      </div>
+      <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" rows="3" placeholder="Detalhes adicionais (opcional)"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select id="status">
+          <option value="pendente">Pendente</option>
+          <option value="em andamento">Em andamento</option>
+          <option value="concluída">Concluída</option>
+        </select>
+      </div>
+      <div class="form-acoes">
+        <button class="btn btn-primario" id="btnSalvar" onclick="salvarTarefa()">Adicionar Tarefa</button>
+        <button class="btn btn-cancelar" id="btnCancelar" onclick="cancelarEdicao()" style="display: none;">Cancelar</button>
+      </div>
+    </div>
+
+    <div class="filtros">
+      <button class="filtro ativo" data-filtro="todos" onclick="filtrar(this)">Todas</button>
+      <button class="filtro" data-filtro="pendente" onclick="filtrar(this)">Pendentes</button>
+      <button class="filtro" data-filtro="em andamento" onclick="filtrar(this)">Em andamento</button>
+      <button class="filtro" data-filtro="concluída" onclick="filtrar(this)">Concluídas</button>
+    </div>
+
+    <div class="lista-tarefas" id="listaTarefas"></div>
+
+    <div class="vazio" id="mensagemVazio" style="display: none;">
+      <div class="vazio-icone">📝</div>
+      <p>Nenhuma tarefa encontrada.</p>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay" style="display: none;">
+    <div class="modal">
+      <h3>Excluir Tarefa</h3>
+      <p>Tem certeza que deseja excluir esta tarefa? Esta ação não pode ser desfeita.</p>
+      <div class="modal-acoes">
+        <button class="btn btn-cancelar" onclick="fecharModal()">Cancelar</button>
+        <button class="btn btn-perigo" id="btnConfirmarExcluir">Sim, Excluir</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
